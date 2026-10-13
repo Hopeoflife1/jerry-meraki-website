@@ -91,6 +91,15 @@ export interface LoginAttempts {
   success: Generated<boolean | null>;
 }
 
+export interface PasswordResets {
+  createdAt: Generated<Timestamp>;
+  expiresAt: Timestamp;
+  id: Generated<number>;
+  tokenHash: string;
+  usedAt: Timestamp | null;
+  userId: number;
+}
+
 export interface ProductCategories {
   code: string;
   createdAt: Generated<Timestamp>;
@@ -148,6 +157,7 @@ export interface DB {
   jobMessages: JobMessages;
   jobs: Jobs;
   loginAttempts: LoginAttempts;
+  passwordResets: PasswordResets;
   productCategories: ProductCategories;
   products: Products;
   sessions: Sessions;

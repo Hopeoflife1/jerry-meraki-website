@@ -12,18 +12,20 @@ import { handle as h8 } from "../src/endpoints/admin/team_role_POST";
 import { handle as h9 } from "../src/endpoints/artwork/attach_POST";
 import { handle as h10 } from "../src/endpoints/artwork/upload-url_POST";
 import { handle as h11 } from "../src/endpoints/auth/change_password_POST";
-import { handle as h12 } from "../src/endpoints/auth/login_with_password_POST";
-import { handle as h13 } from "../src/endpoints/auth/logout_POST";
-import { handle as h14 } from "../src/endpoints/auth/register_with_password_POST";
-import { handle as h15 } from "../src/endpoints/auth/session_GET";
-import { handle as h16 } from "../src/endpoints/jobs/confirm_received_POST";
-import { handle as h17 } from "../src/endpoints/jobs/create_POST";
-import { handle as h18 } from "../src/endpoints/jobs/detail_GET";
-import { handle as h19 } from "../src/endpoints/jobs/feedback_POST";
-import { handle as h20 } from "../src/endpoints/jobs/mine_GET";
-import { handle as h21 } from "../src/endpoints/jobs/payment_claim_POST";
-import { handle as h22 } from "../src/endpoints/jobs/respond_POST";
-import { handle as h23 } from "../src/endpoints/products/list_GET";
+import { handle as h12 } from "../src/endpoints/auth/forgot_password_POST";
+import { handle as h13 } from "../src/endpoints/auth/login_with_password_POST";
+import { handle as h14 } from "../src/endpoints/auth/logout_POST";
+import { handle as h15 } from "../src/endpoints/auth/register_with_password_POST";
+import { handle as h16 } from "../src/endpoints/auth/reset_password_POST";
+import { handle as h17 } from "../src/endpoints/auth/session_GET";
+import { handle as h18 } from "../src/endpoints/jobs/confirm_received_POST";
+import { handle as h19 } from "../src/endpoints/jobs/create_POST";
+import { handle as h20 } from "../src/endpoints/jobs/detail_GET";
+import { handle as h21 } from "../src/endpoints/jobs/feedback_POST";
+import { handle as h22 } from "../src/endpoints/jobs/mine_GET";
+import { handle as h23 } from "../src/endpoints/jobs/payment_claim_POST";
+import { handle as h24 } from "../src/endpoints/jobs/respond_POST";
+import { handle as h25 } from "../src/endpoints/products/list_GET";
 export const routes: Record<string, Handler> = {
   "POST admin/artwork_review": h0,
   "GET admin/jobs": h1,
@@ -37,16 +39,18 @@ export const routes: Record<string, Handler> = {
   "POST artwork/attach": h9,
   "POST artwork/upload-url": h10,
   "POST auth/change_password": h11,
-  "POST auth/login_with_password": h12,
-  "POST auth/logout": h13,
-  "POST auth/register_with_password": h14,
-  "GET auth/session": h15,
-  "POST jobs/confirm_received": h16,
-  "POST jobs/create": h17,
-  "GET jobs/detail": h18,
-  "POST jobs/feedback": h19,
-  "GET jobs/mine": h20,
-  "POST jobs/payment_claim": h21,
-  "POST jobs/respond": h22,
-  "GET products/list": h23,
+  "POST auth/forgot_password": h12,
+  "POST auth/login_with_password": h13,
+  "POST auth/logout": h14,
+  "POST auth/register_with_password": h15,
+  "POST auth/reset_password": h16,
+  "GET auth/session": h17,
+  "POST jobs/confirm_received": h18,
+  "POST jobs/create": h19,
+  "GET jobs/detail": h20,
+  "POST jobs/feedback": h21,
+  "GET jobs/mine": h22,
+  "POST jobs/payment_claim": h23,
+  "POST jobs/respond": h24,
+  "GET products/list": h25,
 };

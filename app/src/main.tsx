@@ -1,9 +1,9 @@
+import "./global.css";
+import "./base.css";
 import { StrictMode, Suspense, lazy, type ComponentType, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GlobalContextProviders } from "./components/_globalContextProviders";
-import "./base.css";
-import "./global.css";
 
 // Routing, replacing Floot's built-in router. Floot page names map to URLs:
 //   _index -> /   ·   quote.new -> /quote/new   ·   jobs.$jobId -> /jobs/:jobId
