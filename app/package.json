@@ -39,7 +39,7 @@
     "gsap": "3.15.0",
     "jose": "6.2.12",
     "kysely": "0.26.3",
-    "kysely-postgres-js": "5.0.1",
+    "kysely-postgres-js": "2.0.0",
     "lucide-react": "^0.477.0",
     "nanoid": "6.0.1",
     "nodemailer": "^6.9.16",
