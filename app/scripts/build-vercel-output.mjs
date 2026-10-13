@@ -19,7 +19,7 @@ await build({
   outfile: join(fnDir, "index.mjs"),
   bundle: true,
   platform: "node",
-  target: "node20",
+  target: "node22",
   format: "esm",
   // Some CJS deps call require(); give the ESM bundle a real require.
   banner: { js: "import { createRequire as __cr } from 'module'; const require = __cr(import.meta.url);" },
@@ -28,7 +28,7 @@ await build({
 });
 writeFileSync(
   join(fnDir, ".vc-config.json"),
-  JSON.stringify({ runtime: "nodejs20.x", handler: "index.mjs", launcherType: "Nodejs", maxDuration: 60 }, null, 2),
+  JSON.stringify({ runtime: "nodejs22.x", handler: "index.mjs", launcherType: "Nodejs", maxDuration: 60 }, null, 2),
 );
 
 writeFileSync(
