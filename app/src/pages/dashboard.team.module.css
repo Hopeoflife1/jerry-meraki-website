@@ -1,0 +1,218 @@
+/* Team & access: grouped-list style (app-wide redesign). */
+.page {
+  --hair: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  max-width: 760px;
+}
+@media (min-resolution: 2dppx) {
+  .page {
+    --hair: 0.5px;
+  }
+}
+.head h1 {
+  font-family: var(--font-family-display);
+  color: var(--primary);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 0;
+}
+.head p {
+  margin: 4px 0 0;
+  max-width: 60ch;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+.eyebrow {
+  display: none;
+}
+@media (min-width: 900px) {
+  .head h1 {
+    font-size: 1.875rem;
+  }
+}
+
+/* Grant form: a plain white group */
+.grant {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background: var(--card);
+  border: var(--hair) solid var(--border);
+  border-radius: 14px;
+}
+.grantText {
+  display: flex;
+  gap: var(--spacing-3);
+  color: var(--primary);
+}
+.grantText > svg {
+  flex: none;
+  margin-top: 2px;
+}
+.grantLabel {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--foreground);
+}
+.help {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+.grantRow {
+  display: flex;
+  gap: var(--spacing-2);
+}
+.grantInput {
+  flex: 1;
+  min-width: 0;
+}
+.grantRow > button {
+  gap: var(--spacing-2);
+  flex: none;
+}
+.error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--error);
+}
+
+/* Lists: one white group, hairline rows */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+.sectionTitle {
+  margin: 0;
+  padding: 0 var(--spacing-1);
+  font-family: var(--font-family-base);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.count {
+  margin-left: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: var(--hair) solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-height: 64px;
+  padding: var(--spacing-3) var(--spacing-4);
+}
+.row + .row {
+  border-top: var(--hair) solid var(--border);
+}
+.person {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-width: 0;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.personText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.name {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.you {
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+.email {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.action {
+  min-width: 112px;
+}
+.skeleton {
+  height: 64px;
+  border-radius: 0;
+}
+.stateBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-8) var(--spacing-6);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  background: var(--card);
+  border: var(--hair) solid var(--border);
+  border-radius: 14px;
+}
+.stateBox p {
+  margin: 0;
+}
+
+@media (pointer: coarse) {
+  .action,
+  .grantRow > button {
+    min-height: 44px;
+  }
+}
+@media (max-width: 640px) {
+  .grantRow {
+    flex-direction: column;
+  }
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "person badge"
+      "action action";
+  }
+  .person {
+    grid-area: person;
+  }
+  .row > :nth-child(2) {
+    grid-area: badge;
+  }
+  .action {
+    grid-area: action;
+    width: 100%;
+  }
+}

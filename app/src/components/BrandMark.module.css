@@ -1,0 +1,99 @@
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-decoration: none;
+  color: var(--primary);
+}
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  position: relative;
+}
+.logo::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--background);
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.name {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.light {
+  color: var(--sidebar-foreground);
+}
+.light .tag {
+  color: var(--lavender);
+}
+.light .logo {
+  background: var(--lavender);
+  color: var(--primary);
+}
+.light .logo::after {
+  border-color: var(--sidebar);
+}
+
+/* Customer header brand, matching the Lovable design: bigger mark, Playfair name, Space Grotesk tagline, no dot.
+   The dashboard rail (.light) keeps the compact styling above. */
+.mark:not(.light) {
+  gap: 14px;
+}
+.mark:not(.light) .logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  font-family: var(--font-family-editorial);
+  font-size: 24px;
+  font-weight: 800;
+}
+.mark:not(.light) .logo::after {
+  display: none;
+}
+.mark:not(.light) .text {
+  gap: 3px;
+}
+.mark:not(.light) .name {
+  font-family: var(--font-family-editorial);
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--primary);
+}
+.mark:not(.light) .tag {
+  font-family: var(--font-family-technical);
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+@media (max-width: 767px) {
+  /* Phone header: compact like a native app bar (owner: pages felt oversized). */
+  .mark:not(.light) { gap: 10px; }
+  .mark:not(.light) .logo { width: 36px; height: 36px; border-radius: 8px; font-size: 16px; }
+  .mark:not(.light) .name { font-size: 18px; }
+  .mark:not(.light) .tag { display: none; }
+}

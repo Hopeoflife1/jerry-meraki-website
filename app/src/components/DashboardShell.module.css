@@ -1,0 +1,276 @@
+.shell {
+  min-height: 100dvh;
+  display: flex;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-family-base);
+}
+.skip {
+  position: fixed;
+  left: var(--spacing-4);
+  top: calc(var(--spacing-2) + var(--safe-area-inset-top, 0px));
+  z-index: var(--z-overlay);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-300%);
+}
+.skip:focus-visible {
+  transform: none;
+  outline: 2px solid transparent;
+  box-shadow: var(--shadow-focus);
+}
+.srOnly,
+.collapsed .railLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Rail */
+.rail {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: calc(var(--spacing-6) + var(--safe-area-inset-top, 0px)) var(--spacing-4) var(--spacing-4);
+  background: var(--sidebar);
+  color: var(--sidebar-foreground);
+  overflow-y: auto;
+  transition:
+    width var(--animation-duration-normal) cubic-bezier(0.2, 0, 0, 1),
+    padding var(--animation-duration-normal) cubic-bezier(0.2, 0, 0, 1);
+}
+.collapsed .rail {
+  width: 72px;
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  align-items: center;
+}
+.brand {
+  border-radius: var(--radius);
+}
+.brand:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--shadow-focus);
+}
+.railList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+.railLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-height: 40px;
+  padding: 0 var(--spacing-3);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sidebar-foreground);
+  text-decoration: none;
+  opacity: 0.82;
+  transition:
+    background-color var(--animation-duration-fast) ease-out,
+    opacity var(--animation-duration-fast) ease-out;
+}
+.collapsed .railLink {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  justify-content: center;
+}
+.railIcon {
+  flex-shrink: 0;
+}
+.railLabel {
+  flex: 1;
+  white-space: nowrap;
+}
+.railLink:focus-visible,
+.toggle:focus-visible {
+  opacity: 1;
+  outline: 2px solid transparent;
+  box-shadow: var(--shadow-focus);
+}
+.active {
+  opacity: 1;
+  background: color-mix(in srgb, var(--sidebar-foreground) 14%, transparent);
+  box-shadow: inset 3px 0 0 var(--lavender);
+}
+.active:focus-visible {
+  box-shadow:
+    inset 3px 0 0 var(--lavender),
+    var(--shadow-focus);
+}
+.count,
+.tabCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.count {
+  margin-left: auto;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 0.6875rem;
+}
+.collapsed .count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-size: 0.625rem;
+}
+.railFoot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+.toggle {
+  align-self: flex-end;
+  color: var(--sidebar-foreground) !important;
+}
+.collapsed .toggle {
+  align-self: center;
+}
+.kbd {
+  margin-left: var(--spacing-1);
+  padding: 0 var(--spacing-1);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-monospace);
+  font-size: 0.75rem;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  min-width: 0;
+  max-width: 1440px;
+  padding: var(--spacing-8);
+  container-type: inline-size;
+}
+.main:focus {
+  outline: none;
+}
+.mobileBar,
+.tabs {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .railLink:not(.active):hover {
+    opacity: 1;
+    background: color-mix(in srgb, var(--sidebar-foreground) 8%, transparent);
+  }
+}
+@media (max-width: 1023px) {
+  .main {
+    padding: var(--spacing-6);
+  }
+}
+
+/* Phone */
+@media (max-width: 767px) {
+  .shell {
+    flex-direction: column;
+  }
+  .rail {
+    display: none;
+  }
+  .mobileBar {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    min-height: 56px;
+    padding: var(--safe-area-inset-top, 0px) var(--spacing-4) 0;
+    background: var(--sidebar);
+  }
+  .main {
+    padding: var(--spacing-4) var(--spacing-4) calc(56px + var(--spacing-8) + var(--safe-area-inset-bottom, 0px));
+  }
+  .tabs {
+    display: flex;
+    gap: var(--spacing-1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: var(--spacing-1) var(--spacing-1) calc(var(--spacing-1) + var(--safe-area-inset-bottom, 0px));
+  }
+  .tab {
+    position: relative;
+    flex: 1;
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: var(--radius);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    text-decoration: none;
+  }
+  .tab:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: var(--shadow-focus);
+  }
+  .tab:active {
+    background: var(--surface);
+  }
+  .tabActive {
+    color: var(--primary);
+    background: var(--secondary);
+  }
+  .tabCount {
+    position: absolute;
+    top: 2px;
+    left: calc(50% + 6px);
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-size: 0.625rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rail,
+  .railLink {
+    transition: none;
+  }
+}

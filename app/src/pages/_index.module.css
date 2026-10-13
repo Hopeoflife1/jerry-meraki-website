@@ -1,0 +1,574 @@
+/* Home: editorial print sheet.
+   Inks: --primary (deep purple) for structure and type, --accent (orange) only for buttons and highlights.
+   Paper: --background / --card creams, never pure white or grey.
+   Hairlines: 1px on standard screens, 0.5px on high-density screens (0.5px vanishes on 1x displays). */
+.page {
+  --hair: 1px;
+  --ink-line: color-mix(in srgb, var(--primary) 40%, transparent);
+  --pad: var(--spacing-6);
+  /* Scoped: product cards on this page also pick up the editorial serif */
+  --font-family-display: var(--font-family-editorial);
+
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  font-family: var(--font-family-base);
+  color: var(--foreground);
+}
+@media (min-resolution: 2dppx) {
+  .page { --hair: 0.5px; }
+}
+@media (min-width: 1024px) {
+  .page {
+    --pad: var(--spacing-12);
+    gap: 6rem;
+  }
+}
+
+/* ───────── Hero sheet ───────── */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-12) var(--pad) 0;
+  background: var(--background);
+  overflow: hidden;
+}
+@media (min-width: 1024px) {
+  .hero { padding-top: 5.5rem; }
+}
+
+.hline,
+.vline {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+.hline {
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: var(--hair) solid var(--ink-line);
+}
+.vline {
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: var(--hair) solid var(--ink-line);
+}
+.hTop { top: 0; }
+.hMid { top: var(--spacing-8); }
+.vLeft { left: 0; }
+.vRight { right: 0; }
+.vSplit { display: none; }
+
+.reg {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  stroke: var(--primary);
+  stroke-width: 0.75;
+  opacity: 0.6;
+}
+.regTl { top: calc(var(--spacing-8) - 9px); left: calc(var(--pad) - 9px); }
+.regTr { top: calc(var(--spacing-8) - 9px); right: calc(var(--pad) - 9px); }
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-12);
+}
+
+.kicker {
+  margin: 0 0 var(--spacing-6);
+}
+.welcome {
+  margin: 0 0 var(--spacing-3);
+  font-family: var(--font-family-technical);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  /* Appears once the login is known (may be after the entry timeline started), so it fades in on its own. */
+  animation: welcomeIn 0.6s ease-out 0.2s both;
+}
+@keyframes welcomeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome { animation: none; }
+}
+.kicker {
+  font-family: var(--font-family-technical);
+  font-size: clamp(1rem, 0.95rem + 0.4vw, 1.25rem);
+  font-weight: 600;
+  color: var(--primary);
+}
+/* The rolling word gets the orange highlight underline */
+.kicker > span > span:last-child {
+  border-bottom: 3px solid var(--accent);
+}
+
+.headline {
+  margin: 0;
+  font-family: var(--font-family-editorial);
+  /* Owner (2026-10-10): 900 felt too heavy next to the calmer app; bold reads confident without shouting. */
+  font-weight: 700;
+  font-size: clamp(2.3rem, 8.5vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--primary);
+}
+/* Each line rises from behind this mask. Padding keeps descenders (g, y, p) from being clipped. */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.mask > span {
+  display: inline-block;
+}
+.mark {
+  /* Solid orange highlight block (owner tried an underline on 2026-10-10 and preferred the block). */
+  background: var(--accent);
+  color: var(--accent-foreground);
+  padding: 0 0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.lede {
+  margin: var(--spacing-8) 0 0;
+  max-width: 420px;
+  font-family: var(--font-family-technical);
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-8);
+}
+/* Wrappers must be boxes, not inline, so the fade-in transform applies */
+.actions > span {
+  display: inline-flex;
+}
+.actions a {
+  gap: var(--spacing-2);
+  min-height: 48px;
+  padding: 14px 20px;
+  font-family: var(--font-family-technical);
+  font-size: 13px;
+  font-weight: 600;
+}
+.cta {
+  background: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+  border-color: var(--accent) !important;
+}
+.ghost {
+  background: transparent !important;
+  color: var(--primary) !important;
+  border: 1px solid var(--primary) !important;
+}
+
+/* Technical metadata */
+.specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: var(--spacing-12) 0 0;
+  border-top: var(--hair) solid var(--ink-line);
+}
+.spec {
+  padding: var(--spacing-4) var(--spacing-3) var(--spacing-4) 0;
+  border-bottom: var(--hair) solid var(--ink-line);
+}
+.spec dt {
+  font-family: var(--font-family-technical);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.75;
+}
+.spec dd {
+  margin: var(--spacing-1) 0 0;
+  font-family: var(--font-family-technical);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--foreground);
+}
+
+/* Phone preview column */
+.heroSide {
+  display: flex;
+  justify-content: center;
+}
+.heroSide > figure {
+  max-width: 300px;
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 62fr 38fr;
+    gap: 0;
+    align-items: center;
+  }
+  .heroMain {
+    padding-right: var(--spacing-12);
+  }
+  .heroSide {
+    padding-left: var(--spacing-8);
+  }
+  .heroSide > figure {
+    max-width: 340px;
+  }
+  .vSplit {
+    display: block;
+    left: calc(var(--pad) + (100% - 2 * var(--pad)) * 0.62);
+  }
+  .specs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 5rem;
+  }
+  .spec {
+    padding: var(--spacing-6) var(--spacing-6) var(--spacing-6) 0;
+  }
+}
+
+/* ───────── Press ticker ─────────
+   Owner (2026-10-10): the solid purple band felt heavy. Now a quiet ivory strip between hairlines,
+   product names in the editorial face with small orange dots, soft faded edges, pauses on hover,
+   and a small round play/pause button. */
+.ticker {
+  --edge: 56px;
+  position: relative;
+  margin: var(--spacing-16) calc(-1 * var(--pad)) 0;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  background: var(--background);
+  color: var(--primary);
+  border-top: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  overflow: hidden;
+}
+/* Soft faded edges (overlays, so the play/pause button above them stays crisp) */
+.ticker::before,
+.ticker::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--edge);
+  pointer-events: none;
+  z-index: 1;
+}
+.ticker::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--background), transparent);
+}
+.ticker::after {
+  right: 0;
+  width: calc(var(--edge) + 48px);
+  background: linear-gradient(270deg, var(--background) 45%, transparent);
+}
+@media (min-resolution: 2dppx) {
+  .ticker {
+    border-top-width: 0.5px;
+    border-bottom-width: 0.5px;
+  }
+}
+@media (min-width: 1024px) {
+  .ticker { margin-top: 6rem; --edge: 120px; }
+}
+.tickerTrack {
+  display: flex;
+  width: max-content;
+  animation: press 60s linear infinite;
+}
+.tickerPaused .tickerTrack,
+.ticker:hover .tickerTrack {
+  animation-play-state: paused;
+}
+.tickerRun {
+  display: flex;
+  flex: none;
+}
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding-right: var(--spacing-6);
+  font-family: var(--font-family-editorial);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+/* The ✦ glyph becomes a small orange dot */
+.star {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  font-size: 0;
+  line-height: 0;
+}
+.tickerBtn {
+  position: absolute;
+  right: var(--pad, 16px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--primary) 12%, transparent);
+  cursor: pointer;
+  z-index: 2;
+}
+.tickerBtn svg {
+  width: 14px;
+  height: 14px;
+}
+@media (hover: hover) {
+  .tickerBtn:hover {
+    background: var(--secondary);
+  }
+}
+/* Keep a 44px touch target around the small visual button */
+.tickerBtn::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+}
+.tickerBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+@keyframes press {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tickerTrack { animation: none; }
+  .tickerBtn { display: none; }
+}
+
+/* ───────── Sections: label column + content (asymmetric on desktop) ───────── */
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-6);
+}
+@media (min-width: 1024px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    gap: var(--spacing-12);
+    align-items: start;
+  }
+}
+
+.sectionLabel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  column-gap: var(--spacing-3);
+  padding-top: var(--spacing-4);
+  border-top: var(--hair) solid var(--ink-line);
+}
+.sectionNum {
+  font-family: var(--font-family-editorial);
+  font-weight: 900;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--primary);
+}
+.sectionLabel h2 {
+  margin: 0;
+  font-family: var(--font-family-editorial);
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1.13;
+  color: var(--primary);
+}
+@media (min-width: 1024px) {
+  .sectionLabel {
+    position: sticky;
+    top: var(--spacing-8);
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--spacing-3);
+  }
+  .sectionNum {
+    font-size: 4rem;
+  }
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  font-family: var(--font-family-technical);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+.more:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Products */
+.services {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-flow: row dense;
+  gap: var(--spacing-8);
+}
+@media (min-width: 640px) {
+  .services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--spacing-8);
+    row-gap: 2.5rem;
+  }
+  .b_lg,
+  .b_wide,
+  .b_full { grid-column: span 2; }
+  .b_tall { grid-row: span 2; }
+}
+@media (min-width: 1100px) {
+  .services {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(15rem, auto);
+    gap: 2.5rem;
+  }
+  .b_sm { grid-column: span 2; }
+  .b_half { grid-column: span 3; }
+  .b_wide { grid-column: span 4; }
+  .b_lg { grid-column: span 4; grid-row: span 2; }
+  .b_tall { grid-column: span 2; grid-row: span 2; }
+  .b_full { grid-column: span 6; }
+}
+.cell {
+  display: flex;
+  min-width: 0;
+}
+.cell > * {
+  flex: 1;
+}
+.cardSkeleton {
+  height: 15rem;
+}
+
+/* Artwork tips */
+.tips {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--spacing-4);
+  row-gap: var(--spacing-1);
+  padding: var(--spacing-6) 0;
+  border-top: var(--hair) solid var(--ink-line);
+}
+.tipNum {
+  grid-row: span 2;
+  font-family: var(--font-family-editorial);
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--primary);
+}
+.tip strong {
+  font-family: var(--font-family-technical);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--foreground);
+}
+.tip span:last-child {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted-foreground);
+}
+@media (min-width: 640px) {
+  .tips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--spacing-8);
+  }
+}
+
+/* Recent jobs */
+.recent {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: var(--spacing-3);
+}
+.recentCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  text-decoration: none;
+  color: var(--foreground);
+  transition: border-color var(--animation-duration-fast), box-shadow var(--animation-duration-fast);
+}
+.recentCard:hover {
+  border-color: var(--lavender);
+  box-shadow: var(--shadow-md);
+}
+.recentCard:focus-visible,
+.more:focus-visible {
+  outline: 2px solid var(--ring, var(--primary));
+  outline-offset: 2px;
+}
+.code {
+  font-family: var(--font-family-technical);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  opacity: 0.75;
+}
+.meta {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+.recentFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--spacing-3);
+}
+.price {
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--primary);
+}
+.recentSkeleton {
+  height: 140px;
+}

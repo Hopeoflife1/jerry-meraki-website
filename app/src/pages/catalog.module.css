@@ -1,0 +1,294 @@
+/* Catalog: technical blueprint layout.
+   Hairlines are 1px on standard screens and 0.5px on high-density (retina, most phones),
+   because 0.5px disappears or renders inconsistently on 1x screens. */
+.page {
+  --hair: 1px;
+  --line: color-mix(in srgb, var(--primary) 35%, transparent);
+  --line-soft: color-mix(in srgb, var(--primary) 8%, transparent);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+@media (min-resolution: 2dppx) {
+  .page { --hair: 0.5px; }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Intro */
+.intro h1 {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--primary);
+  margin: 0 0 4px;
+}
+.intro p {
+  margin: 0;
+  max-width: 56ch;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+.eyebrow {
+  display: none;
+}
+
+/* Blueprint band */
+.blueprint {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-height: 44px;
+}
+.dividerLabel {
+  font-family: var(--font-family-monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  white-space: nowrap;
+}
+.rule {
+  flex: 1;
+  height: 0;
+  border-top: var(--hair) solid var(--line);
+}
+.clear {
+  min-height: 44px;
+  padding: 0 var(--spacing-3);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: transparent;
+  border: var(--hair) solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.clear:focus-visible {
+  outline: 2px solid var(--ring, var(--primary));
+  outline-offset: 2px;
+}
+
+/* Blocks: phone = 2x2, tablet = 2x2 with detail, desktop = 4 asymmetric columns */
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: var(--hair) solid var(--line);
+  border-left: var(--hair) solid var(--line);
+  background-color: var(--card);
+  background-image:
+    linear-gradient(var(--line-soft) var(--hair), transparent var(--hair)),
+    linear-gradient(90deg, var(--line-soft) var(--hair), transparent var(--hair));
+  background-size: 24px 24px;
+}
+
+.block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  min-height: 9rem;
+  padding: var(--spacing-4);
+  text-align: left;
+  font: inherit;
+  color: var(--primary);
+  background: transparent;
+  border: 0;
+  border-right: var(--hair) solid var(--line);
+  border-bottom: var(--hair) solid var(--line);
+  border-radius: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--animation-duration-normal), opacity var(--animation-duration-normal);
+}
+.block:focus-visible {
+  outline: 2px solid var(--ring, var(--primary));
+  outline-offset: -2px;
+  z-index: 1;
+}
+.blockOn {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+.blockDim {
+  opacity: 0.75;
+}
+.blockSkeleton {
+  min-height: 9rem;
+  border-radius: 0;
+}
+
+.num {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.blockName {
+  font-family: var(--font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.blockDesc,
+.blockList {
+  display: none;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.blockDesc {
+  opacity: 0.8;
+}
+.blockList {
+  font-weight: 600;
+}
+.count {
+  margin-top: auto;
+  font-family: var(--font-family-monospace);
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+@media (hover: hover) {
+  .block:not(.blockOn):hover {
+    background: var(--surface);
+    opacity: 1;
+  }
+}
+@media (hover: none) {
+  .block:not(.blockOn):active {
+    background: var(--surface);
+  }
+}
+
+@media (min-width: 640px) {
+  .block {
+    min-height: 13rem;
+    padding: var(--spacing-6);
+  }
+  .blockDesc,
+  .blockList {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blocks {
+    grid-template-columns: 1.35fr 1fr 1.15fr 0.85fr;
+  }
+  .block {
+    min-height: 12rem;
+    padding: var(--spacing-6);
+  }
+  /* Asymmetry: the first block sits taller in the composition */
+  .block:first-child .num {
+    font-size: 3rem;
+  }
+  .blockSkeleton {
+    min-height: 12rem;
+  }
+}
+
+/* Results */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+.groupHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-3);
+  margin: 0;
+  padding-bottom: var(--spacing-2);
+  border-bottom: var(--hair) solid var(--line);
+  font-family: var(--font-family-base);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.groupNum {
+  font-family: var(--font-family-monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: var(--spacing-8);
+}
+@media (min-width: 1100px) {
+  .grid {
+    column-gap: 2.5rem;
+    row-gap: var(--spacing-12);
+  }
+}
+.empty {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+}
+
+.custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  border: var(--hair) solid var(--border);
+  border-radius: 14px;
+  color: var(--primary);
+  text-decoration: none;
+  background: var(--card);
+}
+.custom strong {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+.customSub {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+.custom:focus-visible {
+  outline: 2px solid var(--ring, var(--primary));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block { transition: none; }
+}

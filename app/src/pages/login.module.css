@@ -1,0 +1,40 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--spacing-6);
+}
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: var(--spacing-6);
+}
+.card h1 {
+  font-family: var(--font-family-display);
+  color: var(--primary);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 0 0 var(--spacing-1);
+}
+.card p {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin: 0 0 var(--spacing-5, 1.25rem);
+  line-height: 1.5;
+}
+.tabs {
+  width: 100%;
+  margin-bottom: var(--spacing-4);
+}
+@media (max-width: 767px) {
+  .wrap {
+    padding-top: 0;
+  }
+  .card {
+    border: none;
+    background: transparent;
+    padding: var(--spacing-2) 0;
+  }
+}

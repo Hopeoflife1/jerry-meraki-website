@@ -1,0 +1,100 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+}
+/* connecting line between steps */
+.step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  bottom: 2px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--border);
+}
+.done:not(:last-child)::before {
+  background: var(--primary);
+}
+.icon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--card);
+  position: relative;
+}
+.done .icon {
+  color: var(--primary);
+}
+.current .icon {
+  color: var(--primary);
+  background: var(--secondary);
+}
+.attention .icon {
+  color: var(--accent);
+}
+.todo .icon {
+  color: var(--muted-foreground);
+  opacity: 0.6;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 2px;
+}
+.titleRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+.titleRow strong {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+.todo .titleRow strong {
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+.tag,
+.tagSoft {
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tag {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.tagSoft {
+  background: var(--secondary);
+  color: var(--primary);
+}
+.detail {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.time {
+  font-size: 0.72rem;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}

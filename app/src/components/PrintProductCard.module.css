@@ -1,0 +1,212 @@
+/* Bento tile, ported 1:1 from the Lovable design (src/styles.css .print-tile).
+   Change requested by owner: the tall tile ("Booklets & magazines") title is smaller so it doesn't break awkwardly,
+   and the category + number stay on one line. */
+.tile {
+  --tile-text: var(--foreground);
+  --tile-detail: var(--muted-foreground);
+  --tile-rule: color-mix(in srgb, var(--primary) 40%, transparent);
+  --tile-circle: color-mix(in srgb, var(--primary) 22%, transparent);
+  --tile-bg: var(--card);
+  --hair: 1px;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  min-height: 13rem;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--tile-text);
+  background: var(--tile-bg);
+  text-decoration: none;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
+@media (min-resolution: 2dppx) {
+  .tile { --hair: 0.5px; }
+}
+.tile:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Purple "picked" state: any tile the visitor hovers, focuses with the keyboard or presses.
+   .ink keeps the same look for a tile that should be purple at rest. */
+.ink,
+.tile:focus-visible,
+.tile:active {
+  --tile-text: var(--primary-foreground);
+  --tile-detail: color-mix(in srgb, var(--primary-foreground) 75%, transparent);
+  --tile-rule: color-mix(in srgb, var(--primary-foreground) 30%, transparent);
+  --tile-circle: color-mix(in srgb, var(--primary-foreground) 35%, transparent);
+  --tile-bg: var(--primary);
+  border-color: var(--primary);
+}
+.tint {
+  --tile-bg: var(--secondary);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--tile-circle);
+  border-radius: 50%;
+  color: var(--tile-text);
+}
+.meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+  padding-top: 4px;
+  color: var(--tile-detail);
+  font-family: var(--font-family-technical);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-align: right;
+  white-space: nowrap;
+}
+.category {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.12em;
+}
+.num {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.body {
+  position: relative;
+  margin-top: auto;
+  padding-top: 36px;
+}
+.title {
+  margin: 0;
+  font-family: var(--font-family-editorial);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.16;
+  color: var(--tile-text);
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  transition: color 0.22s ease;
+}
+.desc {
+  margin: 12px 0 0;
+  max-width: 30rem;
+  font-family: var(--font-family-technical);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--tile-detail);
+}
+.extra {
+  margin: 6px 0 0;
+  font-family: var(--font-family-technical);
+  font-size: 0.75rem;
+  color: var(--tile-detail);
+}
+
+.footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: var(--hair) solid var(--tile-rule);
+  font-family: var(--font-family-technical);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.arrow {
+  display: grid;
+  place-items: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--tile-circle);
+  border-radius: 50%;
+  transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease;
+}
+
+.lg,
+.tall {
+  padding: 32px;
+  min-height: 26rem;
+}
+.lg .title {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+/* Owner's adjustment: smaller title on the narrow tall tile (was 2.1rem in Lovable). */
+.tall .title {
+  font-size: clamp(1.45rem, 1.2rem + 0.6vw, 1.7rem);
+  line-height: 1.12;
+}
+
+.watermark {
+  position: absolute;
+  width: 52%;
+  height: auto;
+  bottom: 72px;
+  right: -12px;
+  opacity: 0.08;
+  transition: transform 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover {
+    --tile-text: var(--primary-foreground);
+    --tile-detail: color-mix(in srgb, var(--primary-foreground) 75%, transparent);
+    --tile-rule: color-mix(in srgb, var(--primary-foreground) 30%, transparent);
+    --tile-circle: color-mix(in srgb, var(--primary-foreground) 35%, transparent);
+    --tile-bg: var(--primary);
+    transform: translateY(-3px);
+    border-color: var(--primary);
+    box-shadow: 0 18px 40px -22px color-mix(in srgb, var(--primary) 55%, transparent);
+  }
+  .tile:hover .arrow {
+    transform: rotate(45deg);
+    background: var(--tile-text);
+    color: var(--primary);
+  }
+  .tile:hover .watermark {
+    transform: rotate(-6deg);
+  }
+}
+@media (hover: none) {
+  .tile:active { transform: scale(0.99); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .arrow,
+  .watermark { transition: none; }
+  .tile:hover,
+  .tile:active,
+  .tile:hover .arrow,
+  .tile:hover .watermark { transform: none; }
+}

@@ -1,0 +1,51 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5, 1.25rem);
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+.newBtn {
+  gap: 6px;
+  min-height: 40px;
+}
+.segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 12px;
+  background: var(--muted);
+}
+.segment button {
+  min-height: 36px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+.segment button.on {
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+}
+.segment button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.todo {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 85%, var(--foreground));
+}
+.skeleton {
+  height: 260px;
+  border-radius: 14px;
+}
+.error {
+  color: var(--error);
+}
