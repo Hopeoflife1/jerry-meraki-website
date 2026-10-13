@@ -1,0 +1,62 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin: 0 0 var(--spacing-4);
+  padding: var(--spacing-3) var(--spacing-2) var(--spacing-3) var(--spacing-3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-family: var(--font-family-technical);
+}
+.icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--muted-foreground);
+}
+.text strong {
+  font-size: 0.875rem;
+  color: var(--primary);
+}
+.text b {
+  color: var(--foreground);
+}
+.inline {
+  vertical-align: -2px;
+  color: var(--primary);
+}
+.install {
+  flex: none;
+  gap: 6px;
+  min-height: 40px;
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+.close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+.close:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--shadow-focus);
+}

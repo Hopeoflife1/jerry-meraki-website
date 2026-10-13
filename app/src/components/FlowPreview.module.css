@@ -1,0 +1,456 @@
+/* Mobbin-style preview card: deep ink card, cream phone, caption row below.
+   The phone is drawn at a fixed design size and scaled with the card, so it looks identical on every screen. */
+.card {
+  --phone-w: 248px;
+  --phone-h: 520px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  width: 100%;
+  max-width: 340px;
+}
+
+.stage {
+  display: grid;
+  place-items: center;
+  padding: 2.5rem var(--spacing-6) var(--spacing-12);
+  /* soft light behind the handset so its shadow reads on the dark card */
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 38%, color-mix(in srgb, var(--lavender) 22%, transparent), transparent 70%),
+    var(--sidebar);
+  border-radius: 22px;
+}
+
+/* ── Handset ──
+   Concentric radii: band 46 → bezel 43.5 (2.5px band) → screen 35 (8.5px bezel).
+   Hardware colours are literal greys/black on purpose: they are a device, not brand ink. */
+.device {
+  position: relative;
+  width: min(var(--phone-w), 100%);
+  padding: 2.5px;
+  border-radius: 46px;
+  background: linear-gradient(145deg, #8a8494 0%, #2b2631 22%, #4a4452 48%, #1d1922 72%, #6f6879 100%);
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.35),
+    0 6px 10px -4px rgba(0, 0, 0, 0.45),
+    0 22px 40px -14px rgba(0, 0, 0, 0.6),
+    0 44px 70px -30px rgba(0, 0, 0, 0.55);
+}
+.bezel {
+  padding: 8.5px;
+  border-radius: 43.5px;
+  background: #050307;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.key {
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2a2530, #7a7383 60%, #3a3441);
+}
+.keyAction { left: -2.5px; top: 18%; height: 5%; border-radius: 2px 0 0 2px; }
+.keyVolUp { left: -2.5px; top: 27%; height: 9.5%; border-radius: 2px 0 0 2px; }
+.keyVolDown { left: -2.5px; top: 39%; height: 9.5%; border-radius: 2px 0 0 2px; }
+.keyPower { right: -2.5px; top: 30%; height: 14%; border-radius: 0 2px 2px 0; }
+
+.phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 248 / 520;
+  background: var(--card);
+  border-radius: 35px;
+  overflow: hidden;
+  font-family: var(--font-family-technical);
+  color: var(--foreground);
+  container-type: inline-size;
+}
+/* faint glass reflection across the screen */
+.phone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 28%, transparent 42%);
+}
+.island {
+  position: absolute;
+  z-index: 5;
+  top: 2.6cqw;
+  left: 50%;
+  width: 31cqw;
+  height: 9cqw;
+  margin-left: -15.5cqw;
+  border-radius: 999px;
+  background: #050307;
+}
+
+.status {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 14cqw;
+  padding: 0 8cqw;
+  font-size: 4cqw;
+  font-weight: 600;
+  background: var(--card);
+}
+.statusIcons {
+  display: inline-flex;
+  gap: 1.2cqw;
+}
+.statusIcons i {
+  width: 3cqw;
+  height: 3cqw;
+  border-radius: 50%;
+  background: var(--foreground);
+}
+
+.viewport {
+  position: absolute;
+  inset: 14cqw 0 0;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 4cqw 6cqw 10cqw;
+  background: var(--card);
+  border-radius: 6cqw 6cqw 0 0;
+  box-shadow: 0 -4px 18px rgba(34, 18, 58, 0.12);
+  will-change: transform;
+}
+.screen:first-child {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.step {
+  margin: 0;
+  font-size: 3.4cqw;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.h {
+  margin: 1.5cqw 0 5cqw;
+  font-family: var(--font-family-editorial);
+  font-size: 7.2cqw;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--primary);
+}
+.label {
+  margin: 3cqw 0 2cqw;
+  font-size: 3.4cqw;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+/* Product list */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2cqw;
+}
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  padding: 3cqw;
+  font-size: 4.2cqw;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 3cqw;
+  background: var(--background);
+}
+.rowOn {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+.rowIcon {
+  display: grid;
+  place-items: center;
+  width: 7cqw;
+  height: 7cqw;
+  border-radius: 2cqw;
+  background: var(--secondary);
+  color: var(--primary);
+}
+.rowOn .rowIcon {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+.rowIcon svg,
+.chev,
+.field svg,
+.file svg,
+.reviewed svg {
+  width: 3.6cqw;
+  height: 3.6cqw;
+}
+.chev {
+  margin-left: auto;
+  color: var(--muted-foreground);
+}
+
+/* Tap ripple */
+.tap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14cqw;
+  height: 14cqw;
+  margin: -7cqw 0 0 -7cqw;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Chips and fields */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2cqw;
+}
+.chip {
+  padding: 2cqw 4cqw;
+  font-size: 3.8cqw;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--background);
+}
+.chipOn {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3cqw;
+  font-size: 3.8cqw;
+  border: 1px solid var(--border);
+  border-radius: 3cqw;
+  background: var(--background);
+}
+
+.btn {
+  position: relative;
+  margin-top: auto;
+  display: grid;
+  place-items: center;
+  height: 12cqw;
+  font-size: 4.2cqw;
+  font-weight: 700;
+  border-radius: 3cqw;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  overflow: hidden;
+}
+.btn .tap {
+  background: var(--primary-foreground);
+}
+.btnAccent {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.btnAccent .tap {
+  background: var(--accent-foreground);
+}
+
+/* Artwork */
+.file {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  padding: 3.5cqw;
+  border: 1px dashed var(--primary);
+  border-radius: 3cqw;
+  background: var(--secondary);
+  color: var(--primary);
+}
+.file strong {
+  display: block;
+  font-size: 4cqw;
+}
+.file small {
+  font-size: 3.2cqw;
+  color: var(--muted-foreground);
+}
+.checks {
+  margin: 4cqw 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2.6cqw;
+  font-size: 3.9cqw;
+}
+.checks li {
+  display: flex;
+  align-items: center;
+  gap: 2.5cqw;
+}
+.ok {
+  display: grid;
+  place-items: center;
+  width: 5cqw;
+  height: 5cqw;
+  border-radius: 50%;
+  background: var(--success);
+  color: var(--success-foreground);
+}
+.ok svg,
+.dot svg {
+  width: 3cqw;
+  height: 3cqw;
+}
+
+/* Quote: price shown as bars, so no made-up figure ever appears */
+.quote {
+  display: flex;
+  flex-direction: column;
+  gap: 2.6cqw;
+  padding: 4.5cqw;
+  border: 1px solid var(--border);
+  border-radius: 4cqw;
+  background: var(--background);
+}
+.quote small {
+  font-size: 3.5cqw;
+  color: var(--muted-foreground);
+}
+.bar {
+  height: 6cqw;
+  width: 70%;
+  border-radius: 2cqw;
+  background: var(--primary);
+}
+.barShort {
+  height: 3cqw;
+  width: 45%;
+  opacity: 0.25;
+}
+.reviewed {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5cqw;
+  margin-top: 1cqw;
+  font-size: 3.4cqw;
+  font-weight: 600;
+  color: var(--success);
+}
+
+/* Tracking */
+.track {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5cqw;
+  font-size: 4.1cqw;
+  font-weight: 500;
+}
+.track::before {
+  content: "";
+  position: absolute;
+  left: 2.4cqw;
+  top: 2cqw;
+  bottom: 2cqw;
+  border-left: 1px solid var(--border);
+}
+.track li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  color: var(--muted-foreground);
+}
+.dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 5cqw;
+  height: 5cqw;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+.done {
+  color: var(--foreground) !important;
+}
+.done .dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+.now {
+  color: var(--primary) !important;
+  font-weight: 700;
+}
+.now .dot {
+  border: 2px solid var(--accent);
+}
+
+.home {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 2.5cqw;
+  width: 34cqw;
+  height: 1.4cqw;
+  margin-left: -17cqw;
+  border-radius: 999px;
+  background: var(--foreground);
+  opacity: 0.85;
+}
+
+/* Caption row (like Mobbin's app name under the preview) */
+.caption {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+.logo {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-family: var(--font-family-editorial);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.caption strong {
+  display: block;
+  font-family: var(--font-family-technical);
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+.caption small {
+  display: block;
+  font-family: var(--font-family-technical);
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}

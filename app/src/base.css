@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&family=Playfair+Display:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Overlay layers */
+  --z-overlay: 400;
+
+  --z-spotlight: 1000; /* Tutorial spotlights/guided help */
+
+  /* System layers */
+  --z-critical: 2000; /* Critical system notifications */
+
+  /* spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+}
+
+:root {
+  --background: #fbf8f1;
+  --foreground: #22123a;
+
+  --surface: #f3eee4;
+  --surface-foreground: #22123a;
+  --sidebar: #2a1450;
+  --sidebar-foreground: #f4effc;
+  --card: #fffdf8;
+  --card-foreground: #22123a;
+  --popup: #fffdf8;
+  --popup-foreground: #22123a;
+
+  --primary: #3d1a78;
+  --primary-foreground: #fbf8f1;
+  --secondary: #e9e0f7;
+  --secondary-foreground: #3d1a78;
+  --accent: #f26b1d;
+  --accent-foreground: #22123a;
+  --muted: #efe9de;
+  --muted-foreground: #6c6280;
+
+  --success: #1f7a4d;
+  --success-foreground: #ffffff;
+  --error: #c0362c;
+  --error-foreground: #ffffff;
+  --warning: #c97a06;
+  --warning-foreground: #ffffff;
+  --info: #5b3fa8;
+  --info-foreground: #ffffff;
+  --info-hover: #4c3290;
+  --info-active: #3d2777;
+
+  --border: #e3dccd;
+  --lavender: #c9b8ea;
+
+  --font-family-base: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-family-display: 'Fraunces', Georgia, serif;
+  --font-family-monospace: 'JetBrains Mono', ui-monospace, monospace;
+  --font-family-cursive: 'Caveat', cursive;
+  /* Editorial pair, used on the home page */
+  --font-family-editorial: 'Playfair Display', Georgia, serif;
+  --font-family-technical: 'Space Grotesk', system-ui, sans-serif;
+
+  --shadow: 0 1px 2px rgba(34, 18, 58, 0.06);
+  --shadow-md: 0 4px 14px rgba(34, 18, 58, 0.08);
+  --shadow-lg: 0 12px 32px rgba(34, 18, 58, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(242, 107, 29, 0.35);
+
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  --animation-duration-fast: 120ms;
+  --animation-duration-normal: 220ms;
+  --animation-duration-slow: 380ms;
+
+  --chart-color-1: #3d1a78;
+  --chart-color-2: #f26b1d;
+  --chart-color-3: #8f6fd1;
+  --chart-color-4: #c9b8ea;
+  --chart-color-5: #1f7a4d;
+}
+
+.dark {
+}

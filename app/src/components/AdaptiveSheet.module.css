@@ -1,0 +1,52 @@
+.dialog {
+  max-height: 90dvh;
+  overflow-y: auto;
+}
+.form {
+  width: min(560px, calc(100vw - var(--spacing-8)));
+  max-width: none;
+}
+.wide {
+  width: min(720px, calc(100vw - var(--spacing-8)));
+  max-width: none;
+}
+.confirm {
+  width: min(420px, calc(100vw - var(--spacing-8)));
+  max-width: none;
+}
+.body {
+  min-width: 0;
+}
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  padding-top: var(--spacing-3);
+  background: var(--popup);
+  border-top: 1px solid var(--border);
+}
+.sheet {
+  max-height: 92dvh;
+  overflow-y: auto;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding-bottom: calc(var(--spacing-4) + var(--safe-area-inset-bottom, 0px));
+}
+.sheetTall {
+  height: 92dvh;
+}
+.handle {
+  display: block;
+  width: 36px;
+  height: 4px;
+  margin: 0 auto var(--spacing-2);
+  border-radius: var(--radius-full);
+  background: var(--border);
+}
+.sheetFooter {
+  flex-direction: column-reverse;
+  gap: var(--spacing-2);
+}
+.sheetFooter > * {
+  width: 100%;
+  min-height: 48px;
+}

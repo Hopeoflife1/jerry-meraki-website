@@ -1,0 +1,40 @@
+/* Soft tinted status pills (app-wide redesign): tint + text colour + dot, never a solid colour block. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  background: var(--secondary);
+  color: var(--primary);
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.quote_requested,
+.approved,
+.artwork_check,
+.in_production {
+  background: var(--secondary);
+  color: var(--primary);
+}
+.quoted {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: color-mix(in srgb, var(--accent) 80%, var(--foreground));
+}
+.ready,
+.delivered {
+  background: color-mix(in srgb, var(--success) 14%, transparent);
+  color: var(--success);
+}
+.cancelled {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
