@@ -2,6 +2,8 @@
 // Keeps the same call shapes the endpoints use: upload() -> presigned PUT, getUrl() -> signed read URL,
 // getInfo() -> exists check. Object keys are unchanged from Floot (e.g. "artwork/JM-2610-ABCDE/x-file.pdf").
 const BUCKET = "uploads";
+// Supabase free plan caps files at 50 MB; the artwork form allows up to 50 MB too.
+const MAX_BYTES = 50 * 1024 * 1024;
 
 const base = () => {
   const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -22,9 +24,11 @@ export async function ensureBucket() {
   const r = await fetch(`${base()}/bucket`, {
     method: "POST",
     headers: { ...auth(), "Content-Type": "application/json" },
-    body: JSON.stringify({ id: BUCKET, name: BUCKET, public: false, file_size_limit: 100 * 1024 * 1024 }),
+    body: JSON.stringify({ id: BUCKET, name: BUCKET, public: false, file_size_limit: MAX_BYTES }),
   });
-  if (!r.ok && r.status !== 409 && !(await r.text()).includes("already exists")) throw new Error(`Bucket setup failed: ${r.status}`);
+  if (r.ok || r.status === 409) return;
+  const text = await r.text();
+  if (!text.includes("already exists")) throw new Error(`Bucket setup failed: ${r.status} ${text}`);
 }
 
 export async function putObject(key: string, bytes: Uint8Array, contentType: string) {
@@ -42,7 +46,7 @@ export async function upload(opts: {
   contentType: string;
   sizeBytes: number;
 }): Promise<{ ok: true; presignedUrl: string; url: string; headers: Record<string, string> } | Err> {
-  if (opts.sizeBytes > 100 * 1024 * 1024) return fail("TooLarge", "File is larger than 100 MB");
+  if (opts.sizeBytes > MAX_BYTES) return fail("TooLarge", "File is larger than 50 MB");
   const r = await fetch(`${base()}/object/upload/sign/${BUCKET}/${enc(opts.filename)}`, {
     method: "POST",
     headers: { ...auth(), "x-upsert": "true" },
