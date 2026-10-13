@@ -127,6 +127,17 @@ CREATE TABLE IF NOT EXISTS job_messages (
 );
 CREATE INDEX IF NOT EXISTS job_messages_job_id_idx ON job_messages (job_id, created_at);
 
+-- "Forgot password" links (added 2026-10-13). Only a SHA-256 of the emailed token is stored.
+CREATE TABLE IF NOT EXISTS password_resets (
+  id serial PRIMARY KEY,
+  user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  token_hash text NOT NULL UNIQUE,
+  expires_at timestamptz NOT NULL,
+  used_at timestamptz,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS password_resets_user_idx ON password_resets (user_id, created_at);
+
 -- Supabase exposes the public schema over its REST API; this app only talks to the database from the
 -- server, so lock every table down for the anon/authenticated API roles.
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
@@ -138,3 +149,4 @@ ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 ALTER TABLE jobs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE job_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE job_messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE password_resets ENABLE ROW LEVEL SECURITY;

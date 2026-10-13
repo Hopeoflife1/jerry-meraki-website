@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { z } from "zod";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   Form,
   FormControl,
@@ -89,7 +89,12 @@ export const PasswordLoginForm: React.FC<PasswordLoginFormProps> = ({
         </FormItem>
 
         <FormItem name="password">
-          <FormLabel>Password</FormLabel>
+          <div className={styles.passwordLabelRow}>
+            <FormLabel>Password</FormLabel>
+            <Link to="/forgot-password" className={styles.forgotLink}>
+              Forgot password?
+            </Link>
+          </div>
           <FormControl>
             <Input
               type="password"
