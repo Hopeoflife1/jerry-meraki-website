@@ -26,7 +26,7 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       else if (v != null) headers.set(k, v);
     }
     const body = await readBody(req);
-    const request = new Request(url, { method: req.method, headers, body });
+    const request = new Request(url, { method: req.method, headers, body: body ? new Uint8Array(body) : undefined });
 
     const fn = path === "__migrate" ? migrateHandler : routes[`${req.method} ${path}`];
     const response = fn

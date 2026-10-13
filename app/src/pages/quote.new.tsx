@@ -107,9 +107,6 @@ export default function NewQuotePage() {
         <span className={styles.eyebrow}>New job ticket</span>
         <h1>Request a quote</h1>
         <p>Describe your job and we'll send you one clear price for everything, from printing to finishing.</p>
-        <p role="status" style={{ marginTop: 8, padding: "10px 12px", borderRadius: 10, background: "var(--secondary)", color: "var(--primary)", fontWeight: 600 }}>
-          We're moving to a new website. New quote requests are paused for a short while. Please message us on WhatsApp: 0808 839 0693.
-        </p>
       </header>
 
       <div className={styles.grid}>

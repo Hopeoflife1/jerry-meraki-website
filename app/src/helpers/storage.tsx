@@ -31,7 +31,7 @@ export async function putObject(key: string, bytes: Uint8Array, contentType: str
   const r = await fetch(`${base()}/object/${BUCKET}/${enc(key)}`, {
     method: "POST",
     headers: { ...auth(), "Content-Type": contentType, "x-upsert": "true" },
-    body: bytes,
+    body: new Blob([new Uint8Array(bytes)], { type: contentType }),
   });
   if (!r.ok) throw new Error(`Upload failed: ${r.status} ${await r.text()}`);
 }
