@@ -16,19 +16,18 @@ const fnDir = join(out, "functions/_api.func");
 mkdirSync(fnDir, { recursive: true });
 await build({
   entryPoints: [join(root, "server/handler.ts")],
-  outfile: join(fnDir, "index.mjs"),
+  outfile: join(fnDir, "index.js"),
   bundle: true,
   platform: "node",
   target: "node22",
-  format: "esm",
-  // Some CJS deps call require(); give the ESM bundle a real require.
-  banner: { js: "import { createRequire as __cr } from 'module'; const require = __cr(import.meta.url);" },
+  // CommonJS: Vercel's Node launcher require()s the handler, which fails on an ES module bundle.
+  format: "cjs",
   loader: { ".sql": "text" },
   logLevel: "warning",
 });
 writeFileSync(
   join(fnDir, ".vc-config.json"),
-  JSON.stringify({ runtime: "nodejs22.x", handler: "index.mjs", launcherType: "Nodejs", maxDuration: 60 }, null, 2),
+  JSON.stringify({ runtime: "nodejs22.x", handler: "index.js", launcherType: "Nodejs", maxDuration: 60 }, null, 2),
 );
 
 writeFileSync(
