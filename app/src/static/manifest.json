@@ -1,0 +1,17 @@
+{
+  "name": "Jerry Meraki Print",
+  "short_name": "Jerry Meraki",
+  "description": "Request print quotes, upload artwork and track your print jobs with Jerry Meraki Print Enterprise, Shomolu, Lagos.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf8f1",
+  "theme_color": "#fbf8f1",
+  "icons": [
+    { "src": "/_cdn/static/e9b90944-c540-4136-b42c-24b15bf4b4f7-jm-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/_cdn/static/22fc5950-0221-4509-b109-5de422da7d88-jm-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/_cdn/static/22fc5950-0221-4509-b109-5de422da7d88-jm-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
