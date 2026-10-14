@@ -5,6 +5,7 @@ import { useAuth } from "../helpers/useAuth";
 import { useVirtualKeyboardOpen } from "../helpers/useVirtualKeyboardOpen";
 import { BrandMark } from "./BrandMark";
 import { InstallPrompt } from "./InstallPrompt";
+import { SiteFooter } from "./SiteFooter";
 import { Button } from "./Button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 import styles from "./AppShell.module.css";
@@ -88,6 +89,7 @@ export const AppShell = ({ children }: { children: ReactNode }) => {
         <InstallPrompt />
         {children}
       </main>
+      <SiteFooter />
       <nav aria-label="Primary" className={`${styles.bottomNav} ${keyboardOpen ? styles.bottomNavHidden : ""}`}>
         {links.filter((l) => !l.topOnly).map((l) => (
           <NavLink key={l.to} to={l.to} end={l.end} className={({ isActive }) => `${styles.bottomLink} ${isActive ? styles.active : ""}`}>
