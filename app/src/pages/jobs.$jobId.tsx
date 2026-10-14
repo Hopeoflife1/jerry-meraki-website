@@ -57,7 +57,7 @@ const nextStepText = (job: JobDetail) => {
       return job.readyBy ? `Estimated ready ${fmtDay(job.readyBy)}. We'll update this page when it's done.` : "We'll update this page as soon as it's ready.";
     case "ready":
       return isPickup(job)
-        ? `Collect it at our Shomolu office with your job code ${job.jobCode}.`
+        ? `Collect it at our office, 14/15 Ayoola Lawal, Bariga, with your job code ${job.jobCode}.`
         : `On its way to ${job.deliveryAddress ?? "you"}.`;
     case "delivered":
       return job.feedbackAt ? "Thank you for printing with Jerry Meraki." : "How did we do? Your rating helps us print better.";
@@ -309,7 +309,7 @@ export default function JobDetailPage() {
                 </Row>
                 {job.quotedPrice && <Row label="Payment">{paymentValue}</Row>}
                 {job.readyBy && job.status !== "delivered" && <Row label="Estimated ready">{fmtDay(job.readyBy)}</Row>}
-                <Row label={isPickup(job) ? "Pickup" : "Delivery"}>{isPickup(job) ? "Shomolu office" : job.deliveryAddress ?? "To your address"}</Row>
+                <Row label={isPickup(job) ? "Pickup" : "Delivery"}>{isPickup(job) ? "14/15 Ayoola Lawal, Bariga" : job.deliveryAddress ?? "To your address"}</Row>
               </dl>
               {job.quoteMessage && <p className={styles.message}>{job.quoteMessage}</p>}
               {job.status === "quoted" && (

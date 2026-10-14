@@ -50,7 +50,7 @@ export default function TermsPage() {
           body: (
             <p>
               Ready dates are our best estimate and we will tell you quickly if anything changes. You can collect
-              finished jobs from our Shomolu office with your job code, or ask for delivery. Delivery costs and times
+              finished jobs from our office at 14/15 Ayoola Lawal, Bariga, with your job code, or ask for delivery. Delivery costs and times
               are agreed with you on the quote.
             </p>
           ),

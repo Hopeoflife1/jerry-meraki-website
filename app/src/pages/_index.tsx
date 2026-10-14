@@ -49,7 +49,7 @@ const RegMark = ({ className }: { className: string }) => (
 );
 
 const SPECS = [
-  { k: "Based in", v: "Shomolu, Lagos" },
+  { k: "Based in", v: "Bariga, Lagos" },
   { k: "Quotes", v: "Usually within hours" },
   { k: "Every job", v: "Checked before it prints" },
   { k: "Delivery", v: "On time, to your door" },

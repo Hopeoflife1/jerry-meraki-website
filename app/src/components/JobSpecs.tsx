@@ -11,7 +11,7 @@ export const JobSpecs = ({ job, className }: { job: JobDetail; className?: strin
     ["Colour", job.colourMode],
     ["Finishing", job.finishing.length ? job.finishing.join(", ") : "None"],
     ["Needed by", job.neededBy ? new Date(job.neededBy).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "Flexible"],
-    ["Delivery", job.deliveryMethod === "delivery" ? `Deliver to: ${job.deliveryAddress ?? ""}` : "Pick up in Shomolu"],
+    ["Delivery", job.deliveryMethod === "delivery" ? `Deliver to: ${job.deliveryAddress ?? ""}` : "Pick up at 14/15 Ayoola Lawal, Bariga"],
   ];
   return (
     <div className={`${styles.wrap} ${className || ""}`}>
