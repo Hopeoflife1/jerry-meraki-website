@@ -247,7 +247,7 @@ export default function NewQuotePage() {
             </div>
             <RadioGroup value={deliveryMethod} onValueChange={(v) => setDeliveryMethod(v as "pickup" | "delivery")} className={styles.radios}>
               <label className={styles.radio}>
-                <RadioGroupItem value="pickup" /> Pick up in Shomolu
+                <RadioGroupItem value="pickup" /> Pick up at 14/15 Ayoola Lawal, Bariga
               </label>
               <label className={styles.radio}>
                 <RadioGroupItem value="delivery" /> Deliver to me

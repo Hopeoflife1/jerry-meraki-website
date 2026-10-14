@@ -500,7 +500,7 @@ const NextStepPanel = ({ job }: { job: JobDetail }) => {
       title = pickup ? "Waiting for the customer to collect" : "Out for delivery";
       text = `The customer can also tap "I've ${pickup ? "collected" : "received"} my job" themselves.`;
       waText = pickup
-        ? `Hello ${name}, your job ${job.jobCode} is ready for pickup at our Shomolu office. Please bring your job code. ${link}`
+        ? `Hello ${name}, your job ${job.jobCode} is ready for pickup at our office, 14/15 Ayoola Lawal, Bariga. Please bring your job code. ${link}`
         : `Hello ${name}, your job ${job.jobCode} is on its way to you. ${link}`;
       action = (
         <Button className={styles.primaryStep} disabled={upd.isPending} onClick={() => move("delivered")}>
