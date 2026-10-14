@@ -49,7 +49,11 @@ export const SiteFooter = () => (
           </div>
           <div>
             <dt>Address</dt>
-            <dd>14/15 Ayoola Lawal, Bariga, Lagos, Nigeria</dd>
+            <dd>Shomolu, Lagos, Nigeria</dd>
+          </div>
+          <div>
+            <dt>Visits</dt>
+            <dd>Orders online · pickup by appointment</dd>
           </div>
           <div>
             <dt>Phone / WhatsApp</dt>

@@ -3,6 +3,7 @@ import { getUrl } from "./storage";
 import type { JobDetail, CostBreakdown, ArtworkChecks } from "./jobTypes";
 import type { ArtworkReport } from "./artworkReport";
 import { HttpError } from "./requireUser";
+import { SHOP_PICKUP_ADDRESS } from "./shopAddress";
 
 // Server-only: loads a job with events. Customers only see their own jobs and never the cost breakdown.
 export async function getJobDetail(jobId: number, viewer: { id: number; role: "admin" | "user" }): Promise<JobDetail> {
@@ -53,6 +54,8 @@ export async function getJobDetail(jobId: number, viewer: { id: number; role: "a
     finishing: job.finishing,
     notes: job.notes,
     deliveryMethod: job.deliveryMethod,
+    pickupAddress:
+      job.deliveryMethod !== "delivery" && (job.status === "ready" || job.status === "delivered") ? SHOP_PICKUP_ADDRESS : null,
     deliveryAddress: job.deliveryAddress,
     quoteMessage: job.quoteMessage,
     costBreakdown: isAdmin ? (job.costBreakdown as unknown as CostBreakdown | null) : null,
