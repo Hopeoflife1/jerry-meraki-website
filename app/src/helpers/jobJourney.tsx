@@ -24,7 +24,7 @@ export const statusEventNote = (status: JobStatus, job: { deliveryMethod: string
     case "in_production":
       return `Your job is printing now${readyBy ? `. Estimated ready: ${fmtDay(readyBy)}` : ""}`;
     case "ready":
-      return pickup ? "Your job is ready for pickup at our office, 14/15 Ayoola Lawal, Bariga. Bring your job code." : "Your job is out for delivery";
+      return pickup ? "Your job is ready for pickup. The address is on your job page. Message us before you come and bring your job code." : "Your job is out for delivery";
     case "delivered":
       return pickup ? "Job collected. Thank you!" : "Job delivered. Thank you!";
     case "cancelled":
@@ -99,7 +99,11 @@ export function jobJourney(job: JobDetail): JourneyStep[] {
     "ready",
     pickup ? "Ready for pickup" : "Out for delivery",
     reached(s, "delivered") ? "done" : s === "ready" ? "attention" : "todo",
-    pickup ? "Collect it at our office, 14/15 Ayoola Lawal, Bariga." : `On its way to ${job.deliveryAddress ?? "you"}.`,
+    pickup
+      ? job.pickupAddress
+        ? `Collect it at ${job.pickupAddress}. Message us before you come.`
+        : "Pickup in Shomolu, Lagos. We'll share the exact address when it's ready."
+      : `On its way to ${job.deliveryAddress ?? "you"}.`,
     first("ready"),
   );
   add(

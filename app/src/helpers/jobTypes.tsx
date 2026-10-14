@@ -39,6 +39,8 @@ export type JobDetail = JobSummary & {
   finishing: string[];
   notes: string | null;
   deliveryAddress: string | null;
+  /** Exact shop address; only set for pickup jobs that are ready or collected (not a walk-in shop). */
+  pickupAddress: string | null;
   quoteMessage: string | null;
   costBreakdown: CostBreakdown | null;
   artworkFileName: string | null;
