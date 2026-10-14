@@ -33,9 +33,8 @@ export default function PrivacyPage() {
           heading: "Who can see it",
           body: (
             <p>
-              Only Jerry Meraki staff. We do not sell your information or share your artwork with anyone. Our website
-              runs on trusted hosting providers (Vercel for the website, Supabase for the database and file storage)
-              who store it for us securely.
+              Only Jerry Meraki staff. We do not sell your information or share your artwork with anyone, and we keep
+              it stored securely.
             </p>
           ),
         },
